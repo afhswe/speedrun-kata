@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SpeedrunKata.stage1;
 using System.Collections.Generic;
 using static SpeedrunKata.stage1.Stage1;
 
@@ -7,16 +8,16 @@ namespace SpeedrunKata.Tests.stage1
     [TestClass]
     public class TestStage1
     {
-        //[TestMethod]
-        //[DynamicData(nameof(ProvideCarts))]
-        //public void ComputePrice(Items[] cart, int expectedPrice)
-        //{
-        //    Stage1 stage1 = new Stage1();
-        //    // When
-        //    int price = stage1.ComputePrice(cart);
-        //    // Then
-        //    Assert.AreEqual(expectedPrice, price);
-        //}
+        [TestMethod]
+        [DynamicData(nameof(ProvideCarts))]
+        public void ComputePrice(Items[] cart, int expectedPrice)
+        {
+            Stage1 stage1 = new Stage1();
+            // When
+            int price = stage1.ComputePrice(cart);
+            // Then
+            Assert.AreEqual(expectedPrice, price);
+        }
 
         static IEnumerable<object[]> ProvideCarts
         {

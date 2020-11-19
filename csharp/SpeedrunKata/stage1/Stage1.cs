@@ -1,4 +1,8 @@
-﻿namespace SpeedrunKata.stage1
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SpeedrunKata.stage1
 {
     /**
      * Uncomment the tests, and make them pass
@@ -24,6 +28,12 @@
             {
                 return this.price;
             }
+        }
+
+        public int ComputePrice(Items[] cart)
+        {
+            var cartList = new List<Items>(cart);
+            return cartList.Sum(cartItem => cartItem.GetPrice());
         }
     }
 }
