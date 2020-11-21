@@ -7,38 +7,34 @@ public class Stage3 {
 
     public String doTheThing(String input) {
 
-        String result;
+        String result = input;
+        String preprocessedInput = specialCharactersToLowerCase(input);
         if (input.length() % 2 == 0) {
-            result = input.replace('A', 'a');
-            result = result.replace('E', 'e');
-            String prefix = "even";
-            result = result.replace('I', 'i');
-            result = result.replace('O', 'o');
-            result = result.replace('U', 'u');
-            result = result.replace('Y', 'y');
-            if (result.length() < 10) {
-                result = prefix + "_" + result;
-                result = "short" + "_" + result;
-            } else {
-                result = prefix + "_" + result;
-                result = "long" + "_" + result;
-            }
-        } else {
-            result = input.replace('A', 'a');
-            String prefix = "odd";
-            result = result.replace('E', 'e');
-            result = result.replace('I', 'i');
-            result = result.replace('O', 'o');
-            result = result.replace('U', 'u');
-            result = result.replace('Y', 'y');
-            if (result.length() < 10) {
-                result = prefix + "_" + result;
-                result = "short_" + result;
-            } else {
-                result = prefix + "_" + result;
-                result = "long_" + result;
-            }
+            return addPrefixTo(preprocessedInput, "even");
         }
+        return addPrefixTo(preprocessedInput, "odd");
+    }
+
+    private String addPrefixTo(String result, String prefix) {
+        String prefixedResult = prefix + "_" + result;
+        if (result.length() < 10) {
+            return "short_" + prefixedResult;
+        }
+        return "long_" + prefixedResult;
+    }
+
+    private String specialCharactersToLowerCase(String result) {
+        result = replaceToLowerCase(result, 'A');
+        result = replaceToLowerCase(result, 'E');
+        result = replaceToLowerCase(result, 'I');
+        result = replaceToLowerCase(result, 'O');
+        result = replaceToLowerCase(result, 'U');
+        result = replaceToLowerCase(result, 'Y');
+        return result;
+    }
+
+    private String replaceToLowerCase(String result, char input) {
+        result = result.replace(input, String.valueOf(input).toLowerCase().charAt(0));
         return result;
     }
 }
