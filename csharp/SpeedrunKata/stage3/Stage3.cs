@@ -39,15 +39,21 @@
                 result = result.Replace('Y', 'y');
                 if (result.Length < 10)
                 {
-                    result = prefix + "_" + result;
+                    result = PrefixResult(result, prefix);
                     result = "short_" + result;
                 }
                 else
                 {
-                    result = prefix + "_" + result;
+                    result = PrefixResult(result, prefix);
                     result = "long_" + result;
                 }
             }
+            return result;
+        }
+
+        private static string PrefixResult(string result, string prefix)
+        {
+            result = prefix + "_" + result;
             return result;
         }
     }
