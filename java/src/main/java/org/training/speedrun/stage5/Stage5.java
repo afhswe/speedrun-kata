@@ -10,29 +10,30 @@ public class Stage5 {
 
     boolean isEligible(String word) {
         if (word.length() >= 10) {
-            List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u', 'y');
-            long nbVowels = word.chars().mapToObj(c -> (char) c).filter(vowels::contains).count();
-            if (nbVowels >= 4) {
-                return true;
-            } else {
-                List<Character> specialLetters = Arrays.asList('p', 'm');
-                long nbSpecialLetters = word.chars().mapToObj(c -> (char) c).filter(specialLetters::contains).count();
-                if (nbSpecialLetters >= 3) {
-                    return true;
-                }
-            }
-        } else {
-            long nbLettersInUpperCase = word.chars().filter(c -> c >= 'A' && c <= 'Z').count();
-            if (nbLettersInUpperCase >= 5) {
-                return true;
-            } else {
-                List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u', 'y');
-                long nbVowels = word.chars().mapToObj(c -> (char) c).filter(vowels::contains).count();
-                if (nbVowels >= 3) {
-                    return true;
-                }
-            }
+            return isLongWordEligible(word);
         }
-        return false;
+        return isShortWordEligble(word);
+    }
+
+    private boolean isShortWordEligble(String word) {
+        return getNumberOfLettersInUpperCase(word) >= 5 || getNumberOfVowels(word) >= 3;
+    }
+
+    private long getNumberOfLettersInUpperCase(String word) {
+        return word.chars().filter(c -> c >= 'A' && c <= 'Z').count();
+    }
+
+    private long getNumberOfVowels(String word) {
+        List<Character> vowels = Arrays.asList('a', 'e', 'i', 'o', 'u', 'y');
+        return word.chars().mapToObj(c -> (char) c).filter(vowels::contains).count();
+    }
+
+    private boolean isLongWordEligible(String word) {
+        return getNumberOfVowels(word) >= 4 || getNumberOfSpecialLetters(word) >= 3;
+    }
+
+    private long getNumberOfSpecialLetters(String word) {
+        List<Character> specialLetters = Arrays.asList('p', 'm');
+        return word.chars().mapToObj(c -> (char) c).filter(specialLetters::contains).count();
     }
 }
